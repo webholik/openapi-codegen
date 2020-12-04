@@ -1,0 +1,57 @@
+{
+  "name": "Python",
+  "type": "client",
+  "defaults": {
+    "asyncio": false,
+    "tornado": false,
+    "packageName": "openapi_server",
+    "package": "openapi_server",
+    "baseNamespace": "openapi_server",
+    "generatorPackage": "openapi_server",
+    "invokerPackage": "openapi_server",
+    "importPath": "openapi_server",
+    "apiPackage": "openapi_server.api",
+    "pythonPackageName":"openapi_server",
+    "modelPackage": "openapi_server.model",
+    "serverPackage": "openapi_server.api_server",
+    "modelNaming": "PascalCase",
+    "modelPropertyNaming": "snake_case",
+    "imports": []
+  },
+  "directories": [
+    "openapi_server",
+    "openapi_server/models",
+    "openapi_server/api"
+  ],
+  "partials": {
+
+  },
+  "transformations": [
+    { "input": "travis.mustache", "output": ".travis.yml" },
+    { "input": "openapi.mustache", "output": "openapi_server/openapi/openapi.yaml" },
+    { "input": "dockerignore.mustache", "output": ".dockerignore.yml" },
+    { "input": "setup.mustache", "output": "setup.py" },
+    { "input": "README.mustache", "output": "README.md" },
+    { "input": "requirements.mustache", "output": "requirements.txt" },
+    { "input": "test-requirements.mustache", "output": "test-requirements.txt" },
+    { "input": "tox.mustache", "output": "tox.ini" },
+    { "input": "git_push.sh.mustache", "output": "git_push.sh" },
+    { "input": "gitignore.mustache", "output": ".gitignore" },
+    { "input": "Dockerfile.mustache", "output": "Dockerfile" },
+    { "input": "__init__.mustache", "output": "openapi_server/__init__.py" },
+    { "input": "__init__.mustache", "output": "openapi_server/__main__.py" },
+    { "input": "typing_utils.mustache", "output": "openapi_server/typing_utils.py" },
+    { "input": "util.mustache", "output": "openapi_server/util.py" },
+    { "input": "encoder.mustache", "output": "openapi_server/encoder.py" },
+    { "input": "__init__test.mustache", "output": "openapi_server/test/__init__.py" },
+    { "input": "__init__model.mustache", "output": "openapi_server/models/__init__.py" },
+    { "input": "base_model_.mustache", "output": "openapi_server/models/base_model_.py"}
+  ],
+  "perApi":[
+      { "input": "controller.mustache", "output": "openapi_server/controller/{{name}}_controller.py"},
+      { "input": "controller_test.mustache", "output": "openapi_server/test/test_{{name}}_controller.py" },
+  ],
+  "perModel": [
+    { "input": "model.mustache", "output": "openapi_server/models/{{#models}}{{#model}}{{name}}{{/model}}{{/models}}.py" }
+  ]
+}
