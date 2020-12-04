@@ -5,18 +5,19 @@ const admzip = require('adm-zip');
 
 function getList() {
     let list = []
-    fs.readdirSync('./configs').forEach(file => {
+    fs.readdirSync(__dirname + '/configs').forEach(file => {
         list.push(file.split('.').slice(0, -1).join('.'))
     })
 
     return list;
 }
+
 function generate(openapi, lang) {
     const spec = yaml.parse(openapi, {prettyErrors: true});
-    const config = JSON.parse(fs.readFileSync(`./configs/${lang}.json`, 'utf-8'));
+    const config = JSON.parse(fs.readFileSync(`${__dirname}/configs/${lang}.json`, 'utf-8'));
     let data;
 
-    // The parse somewhere checks if the source is remote or not
+    // The parser somewhere checks if the source is remote or not
     // so we need to provide a name which does not look like a url
     config.defaults.source = 'swagger.yaml';
     let zipFiles = {};
