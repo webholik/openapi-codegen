@@ -1,0 +1,29 @@
+{
+    "defaults": {
+        "serverPort": "3000",
+        "implFolder": "impl",
+        "googleCloudFunctions": false
+    },
+    "directories": [
+        "api", "controllers", "utils", "services"
+    ],
+    "transformations": [
+        { "input": "index.mustache", "output": "index.js" },
+        { "input": "package.mustache", "output": "package.json" },
+        { "input": "README.mustache", "output": "README.md" },
+        { "input": "openapi.mustache", "output": "api/openapi.yaml" },
+        { "input": "config.mustache", "output": "config.js" },
+        { "input": "logger.mustache", "output": "logger.js" },
+        { "input": "eslintrc.mustache", "output": ".eslintrc.json" },
+        { "input": "expressServer.mustache", "output": "expressServer.js" },
+        { "input": "utils/openapiRouter.mustache", "output": "utils/openapiRouter.js" },
+        { "input": "controllers/Controller.mustache", "output": "controllers/Controller.js" },
+        { "input": "controllers/index.mustache", "output": "controllers/index.js" },
+        { "input": "services/Service.mustache", "output": "services/Service.js" },
+        { "input": "services/index.mustache", "output": "services/index.js" }
+    ],
+    "perApi": [
+        { "input": "controller.mustache", "output": "controllers/{{name}}Controller.js" },
+        { "input": "service.mustache", "output": "services/{{name}}Service.js" }
+    ]
+}

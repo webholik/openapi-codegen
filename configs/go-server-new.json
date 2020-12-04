@@ -1,0 +1,31 @@
+{
+    "defaults": {
+        "language": "go",
+        "packageName": "api",
+        "imports": [ ],
+        "apiPath": "go"
+    },
+    "directories": [
+        "go", "api"
+    ],
+    "partials": {
+	"partial_header": "partial_header.mustache"
+    },
+    "transformations": [
+        { "input": "controller-api.mustache", "output": "go/controller-api.go" },
+        { "input": "logger.mustache", "output": "go/logger.go" },
+        { "input": "main.mustache", "output": "main.go" },
+        { "input": "README.mustache", "output": "README.md" },
+        { "input": "routers.mustache", "output": "go/routers.go" },
+        { "input": "openapi.mustache", "output": "api/openapi.yaml" },
+        { "input": "api.mustache", "output": "go/api.go" },
+        { "input": "Dockerfile.mustache", "output": "Dockerfile" }
+    ],
+    "perApi": [
+        { "input": "controller-api.mustache", "output": "go/api_{{name}}.go" },
+        { "input": "service.mustache", "output": "go/api_{{name}}_service.go" }
+    ],
+    "perModel": [
+	{ "input": "model.mustache", "output": "go/model_{{name}}.go" }
+    ]
+}
