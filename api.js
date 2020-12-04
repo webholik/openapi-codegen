@@ -9,7 +9,7 @@ function getList() {
         list.push(file.split('.').slice(0, -1).join('.'))
     })
 
-    console.log(list);
+    return list;
 }
 function generate(openapi, lang) {
     const spec = yaml.parse(openapi, {prettyErrors: true});
