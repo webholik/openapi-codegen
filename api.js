@@ -2,6 +2,7 @@ const fs = require('fs');
 const processor = require('./local');
 const yaml = require('yaml');
 const admzip = require('adm-zip');
+const swagger2openapi = require('swagger2openapi');
 
 function getList() {
     let list = []
@@ -16,6 +17,22 @@ function generate(openapi, lang) {
     const spec = yaml.parse(openapi, {prettyErrors: true});
     const config = JSON.parse(fs.readFileSync(`${__dirname}/configs/${lang}.json`, 'utf-8'));
     let data;
+
+    if (spec.swagger && spec.swaggerVersion === '2.0') {
+        swagger2openapi.convertObj(spec, {
+            patch: true,
+            anchors: true,
+            warnOnly: true,
+            direct: true
+        }, (err, openapi) => {
+            if (err) {
+                console.error(err);
+            } else {
+                config.defaults.swagger = spec;
+                spec = openapi;
+            }
+        })
+    }
 
     // The parser somewhere checks if the source is remote or not
     // so we need to provide a name which does not look like a url
